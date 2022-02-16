@@ -39,6 +39,32 @@ const MORSE_TABLE = {
 
 function decode(expr) {
     // write your solution here
+    let result = ''
+    let arrayFromExpr = []
+    for (let i = 0; i < expr.length; i+=10) {
+        arrayFromExpr.push(expr.slice(i, i + 10))
+    }
+
+    for (let i = 0; i < arrayFromExpr.length; i++ ) {
+        
+        
+    }
+
+   
+    // function arrayFromeExpr(){
+
+        
+    // }
+
+    // function seachLetter(MORSE_TABLE, a){
+    //     for (let key in MORSE_TABLE) {
+    //         if(key == a){result +=a}            
+    //       }
+    // }
+
+
+
+    // return result
 }
 
 module.exports = {
