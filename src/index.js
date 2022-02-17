@@ -36,12 +36,11 @@ const MORSE_TABLE = {
     '----.':  '9',
     '-----':  '0',
 };
-const expr = "00101010100000000010001011101000101110100000111111**********00001011110000111111000010111000101110100000111010";
+function decode(expr) {
 let result = ''
-let a = []
-let b
-let c = []
 let arrayFromExpr = []
+let morzArray = []
+
 
 for (let i = 0; i < expr.length; i += 10) {
     arrayFromExpr.push(expr.slice(i, i + 10))
@@ -49,20 +48,20 @@ for (let i = 0; i < expr.length; i += 10) {
 console.log(arrayFromExpr)
 
 for (let i = 0; i < arrayFromExpr.length; i++ ) {
-
     if(arrayFromExpr[i] !== '**********'){
-        a = arrayFromExpr[i].match(/(.{1,2})/gim) /*детаем массив разбивая элемент-строку на массив по 2 цифры */
-        console.log(a)
-        for(let i = 0; i< a.length; i++){
-            if(a[i] == '10'){b +='.'}
-            else if(a[i] == '11'){b +='-'}
-                c.push(b)
-        }
-        c.push(b)
+        arrayFromExpr[i] = arrayFromExpr[i].replace(/10/gi, '.').replace(/11/gi, '-').replace(/0/gi, '')          
+        morzArray.push(arrayFromExpr[i])           
+    }    
+   else{morzArray.push('**********')}
+}
 
-
+for (let i = 0; i < morzArray.length; i++ ) {
+    if (Object.keys(MORSE_TABLE).includes(morzArray[i])){
+        result += MORSE_TABLE[morzArray[i]]
     }
-    else{c.push('**********')}
+    else{result += ' '}
+}
+return result
 
 }
 
@@ -71,22 +70,6 @@ for (let i = 0; i < arrayFromExpr.length; i++ ) {
 
 
 
-    // function arrayFromeExpr(){
-
-
-    // }
-
-    // function seachLetter(MORSE_TABLE, a){
-    //     for (let key in MORSE_TABLE) {
-    //         if(key == a){result +=a}
-    //       }
-    // }
-
-
-
-    // return result
-
-
-// module.exports = {
-//     decode
-// }
+module.exports = {
+    decode
+}
